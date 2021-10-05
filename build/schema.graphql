@@ -1,0 +1,10 @@
+type DPool @entity {
+  id: ID!
+  address: String!
+  moneyMarket: String!
+  stablecoin: String!
+  interestModel: String!
+  oneYearInterestRate: BigDecimal!
+  oracleInterestRate: BigDecimal!
+  surplus: BigDecimal!
+}

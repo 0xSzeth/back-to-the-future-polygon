@@ -10,8 +10,8 @@ import {
   ETopupDeposit,
   EWithdraw,
   OwnershipTransferred
-} from "../generated/cDAIPool/DInterest";
-import { IInterestOracle } from "../generated/cDAIPool/IInterestOracle";
+} from "../generated/aDAIPool/DInterest";
+import { IInterestOracle } from "../generated/aDAIPool/IInterestOracle";
 import { DPool } from "../generated/schema";
 
 let YEAR = BigInt.fromI32(31556952); // One year in seconds
@@ -119,17 +119,17 @@ export function handleBlock(block: ethereum.Block): void {
 
         let oneYearInterestRate = poolContract.try_calculateInterestAmount(tenPow(18), YEAR);
         pool.oneYearInterestRate = oneYearInterestRate.reverted
-          ? null
+          ? ZERO_DEC
           : normalize(oneYearInterestRate.value)
 
         let oracleInterestRate = oracleContract.try_updateAndQuery();
         pool.oracleInterestRate = oracleInterestRate.reverted
-          ? null
+          ? ZERO_DEC
           : normalize(oracleInterestRate.value.value1)
 
         let surplusResult = poolContract.try_surplus();
         pool.surplus = surplusResult.reverted
-          ? null
+          ? ZERO_DEC
           : normalize(surplusResult.value.value1, stablecoinDecimals).times(surplusResult.value.value0 ? NEGONE_DEC : ONE_DEC)
 
         pool.save();
