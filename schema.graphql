@@ -1,6 +1,10 @@
-type ExampleEntity @entity {
+type DPool @entity {
   id: ID!
-  count: BigInt!
-  sender: Bytes! # address
-  depositID: BigInt! # uint256
+  address: String!
+  moneyMarket: String!
+  stablecoin: String!
+  interestModel: String!
+  oneYearInterestRate: BigDecimal!
+  oracleInterestRate: BigDecimal!
+  surplus: BigDecimal!
 }
