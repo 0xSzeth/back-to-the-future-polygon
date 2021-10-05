@@ -3,11 +3,12 @@ schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum/contract
-    name: DInterest
+    name: aDAIPool
     network: matic
     source:
       address: "0xa78276C04D8d807FeB8271fE123C1f94c08A414d"
       abi: DInterest
+      startBlock: 19856040
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -25,6 +26,8 @@ dataSources:
       abis:
         - name: DInterest
           file: ./abis/DInterest.json
+        - name: IInterestOracle
+          file: ./abis/IInterestOracle.json
       eventHandlers:
         - event: EDeposit(indexed address,indexed uint256,uint256,uint256,uint256,uint64)
           handler: handleEDeposit
@@ -44,4 +47,246 @@ dataSources:
           handler: handleEWithdraw
         - event: OwnershipTransferred(indexed address,indexed address)
           handler: handleOwnershipTransferred
-      file: ./src/mapping.ts
+      blockHandlers:
+        - handler: handleBlock
+      file: ./src/DInterest.ts
+  - kind: ethereum/contract
+    name: aUSDCPool
+    network: matic
+    source:
+      address: "0x3933bAAc41f04D0FFa0977b0e879Bc56482aD667"
+      abi: DInterest
+      startBlock: 19857367
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - EDeposit
+        - EFund
+        - EPayFundingInterest
+        - ERolloverDeposit
+        - ESetParamAddress
+        - ESetParamUint
+        - ETopupDeposit
+        - EWithdraw
+        - OwnershipTransferred
+      abis:
+        - name: DInterest
+          file: ./abis/DInterest.json
+        - name: IInterestOracle
+          file: ./abis/IInterestOracle.json
+      eventHandlers:
+        - event: EDeposit(indexed address,indexed uint256,uint256,uint256,uint256,uint64)
+          handler: handleEDeposit
+        - event: EFund(indexed address,indexed uint64,uint256,uint256)
+          handler: handleEFund
+        - event: EPayFundingInterest(indexed uint256,uint256,uint256)
+          handler: handleEPayFundingInterest
+        - event: ERolloverDeposit(indexed address,indexed uint64,indexed uint64)
+          handler: handleERolloverDeposit
+        - event: ESetParamAddress(indexed address,indexed string,address)
+          handler: handleESetParamAddress
+        - event: ESetParamUint(indexed address,indexed string,uint256)
+          handler: handleESetParamUint
+        - event: ETopupDeposit(indexed address,indexed uint64,uint256,uint256,uint256)
+          handler: handleETopupDeposit
+        - event: EWithdraw(indexed address,indexed uint256,indexed bool,uint256,uint256)
+          handler: handleEWithdraw
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+      blockHandlers:
+        - handler: handleBlock
+      file: ./src/DInterest.ts
+  - kind: ethereum/contract
+    name: aUSDTPool
+    network: matic
+    source:
+      address: "0xf5eF24a27f35Cbe8A2b0a954ACF81d7064CE6B70"
+      abi: DInterest
+      startBlock: 19857809
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - EDeposit
+        - EFund
+        - EPayFundingInterest
+        - ERolloverDeposit
+        - ESetParamAddress
+        - ESetParamUint
+        - ETopupDeposit
+        - EWithdraw
+        - OwnershipTransferred
+      abis:
+        - name: DInterest
+          file: ./abis/DInterest.json
+        - name: IInterestOracle
+          file: ./abis/IInterestOracle.json
+      eventHandlers:
+        - event: EDeposit(indexed address,indexed uint256,uint256,uint256,uint256,uint64)
+          handler: handleEDeposit
+        - event: EFund(indexed address,indexed uint64,uint256,uint256)
+          handler: handleEFund
+        - event: EPayFundingInterest(indexed uint256,uint256,uint256)
+          handler: handleEPayFundingInterest
+        - event: ERolloverDeposit(indexed address,indexed uint64,indexed uint64)
+          handler: handleERolloverDeposit
+        - event: ESetParamAddress(indexed address,indexed string,address)
+          handler: handleESetParamAddress
+        - event: ESetParamUint(indexed address,indexed string,uint256)
+          handler: handleESetParamUint
+        - event: ETopupDeposit(indexed address,indexed uint64,uint256,uint256,uint256)
+          handler: handleETopupDeposit
+        - event: EWithdraw(indexed address,indexed uint256,indexed bool,uint256,uint256)
+          handler: handleEWithdraw
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+      blockHandlers:
+        - handler: handleBlock
+      file: ./src/DInterest.ts
+  - kind: ethereum/contract
+    name: aWBTCPool
+    network: matic
+    source:
+      address: "0x0E99145166e2982bb67054A1E5d3a902Fc4d2b59"
+      abi: DInterest
+      startBlock: 19857897
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - EDeposit
+        - EFund
+        - EPayFundingInterest
+        - ERolloverDeposit
+        - ESetParamAddress
+        - ESetParamUint
+        - ETopupDeposit
+        - EWithdraw
+        - OwnershipTransferred
+      abis:
+        - name: DInterest
+          file: ./abis/DInterest.json
+        - name: IInterestOracle
+          file: ./abis/IInterestOracle.json
+      eventHandlers:
+        - event: EDeposit(indexed address,indexed uint256,uint256,uint256,uint256,uint64)
+          handler: handleEDeposit
+        - event: EFund(indexed address,indexed uint64,uint256,uint256)
+          handler: handleEFund
+        - event: EPayFundingInterest(indexed uint256,uint256,uint256)
+          handler: handleEPayFundingInterest
+        - event: ERolloverDeposit(indexed address,indexed uint64,indexed uint64)
+          handler: handleERolloverDeposit
+        - event: ESetParamAddress(indexed address,indexed string,address)
+          handler: handleESetParamAddress
+        - event: ESetParamUint(indexed address,indexed string,uint256)
+          handler: handleESetParamUint
+        - event: ETopupDeposit(indexed address,indexed uint64,uint256,uint256,uint256)
+          handler: handleETopupDeposit
+        - event: EWithdraw(indexed address,indexed uint256,indexed bool,uint256,uint256)
+          handler: handleEWithdraw
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+      blockHandlers:
+        - handler: handleBlock
+      file: ./src/DInterest.ts
+  - kind: ethereum/contract
+    name: aWETHPool
+    network: matic
+    source:
+      address: "0x3B79Eb9675ED29554f57b719dC66A461a4C84970"
+      abi: DInterest
+      startBlock: 19857981
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - EDeposit
+        - EFund
+        - EPayFundingInterest
+        - ERolloverDeposit
+        - ESetParamAddress
+        - ESetParamUint
+        - ETopupDeposit
+        - EWithdraw
+        - OwnershipTransferred
+      abis:
+        - name: DInterest
+          file: ./abis/DInterest.json
+        - name: IInterestOracle
+          file: ./abis/IInterestOracle.json
+      eventHandlers:
+        - event: EDeposit(indexed address,indexed uint256,uint256,uint256,uint256,uint64)
+          handler: handleEDeposit
+        - event: EFund(indexed address,indexed uint64,uint256,uint256)
+          handler: handleEFund
+        - event: EPayFundingInterest(indexed uint256,uint256,uint256)
+          handler: handleEPayFundingInterest
+        - event: ERolloverDeposit(indexed address,indexed uint64,indexed uint64)
+          handler: handleERolloverDeposit
+        - event: ESetParamAddress(indexed address,indexed string,address)
+          handler: handleESetParamAddress
+        - event: ESetParamUint(indexed address,indexed string,uint256)
+          handler: handleESetParamUint
+        - event: ETopupDeposit(indexed address,indexed uint64,uint256,uint256,uint256)
+          handler: handleETopupDeposit
+        - event: EWithdraw(indexed address,indexed uint256,indexed bool,uint256,uint256)
+          handler: handleEWithdraw
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+      blockHandlers:
+        - handler: handleBlock
+      file: ./src/DInterest.ts
+  - kind: ethereum/contract
+    name: aWMATICPool
+    network: matic
+    source:
+      address: "0x4f28Fc2Be45682D1be1d0f155f4a52D4509Db629"
+      abi: DInterest
+      startBlock: 19856605
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - EDeposit
+        - EFund
+        - EPayFundingInterest
+        - ERolloverDeposit
+        - ESetParamAddress
+        - ESetParamUint
+        - ETopupDeposit
+        - EWithdraw
+        - OwnershipTransferred
+      abis:
+        - name: DInterest
+          file: ./abis/DInterest.json
+        - name: IInterestOracle
+          file: ./abis/IInterestOracle.json
+      eventHandlers:
+        - event: EDeposit(indexed address,indexed uint256,uint256,uint256,uint256,uint64)
+          handler: handleEDeposit
+        - event: EFund(indexed address,indexed uint64,uint256,uint256)
+          handler: handleEFund
+        - event: EPayFundingInterest(indexed uint256,uint256,uint256)
+          handler: handleEPayFundingInterest
+        - event: ERolloverDeposit(indexed address,indexed uint64,indexed uint64)
+          handler: handleERolloverDeposit
+        - event: ESetParamAddress(indexed address,indexed string,address)
+          handler: handleESetParamAddress
+        - event: ESetParamUint(indexed address,indexed string,uint256)
+          handler: handleESetParamUint
+        - event: ETopupDeposit(indexed address,indexed uint64,uint256,uint256,uint256)
+          handler: handleETopupDeposit
+        - event: EWithdraw(indexed address,indexed uint256,indexed bool,uint256,uint256)
+          handler: handleEWithdraw
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+      blockHandlers:
+        - handler: handleBlock
+      file: ./src/DInterest.ts
